@@ -1,6 +1,9 @@
+#!/usr/bin/python
+
 from typing import Callable, Tuple
 from flask import Flask, request, abort
 from functools import wraps
+from waitress import serve
 import dlib
 import os
 import json
@@ -275,3 +278,7 @@ def validate_face(proposed_face: dict, face_list: list) -> dict:
             return proposed_face
     proposed_face["detection_confidence"] *= 0.8
     return proposed_face
+
+
+if __name__ == "__main__":
+    serve(app, host='0.0.0.0', port=5000)
